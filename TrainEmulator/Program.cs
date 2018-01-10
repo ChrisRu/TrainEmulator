@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace TrainEmulator
+namespace TrainAPI
 {
     public class Program
     {

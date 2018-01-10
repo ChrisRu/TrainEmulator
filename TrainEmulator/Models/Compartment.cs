@@ -1,10 +1,10 @@
-﻿namespace TrainEmulator.Models
+﻿namespace TrainAPI.Models
 {
     public class Compartment
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public int PeopleCount { get; set; }
+        public int PeopleCount { get; }
 
         public Compartment(int id, int peopleCount)
         {

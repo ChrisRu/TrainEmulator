@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace TrainEmulator.Models
+namespace TrainAPI.Models
 {
     public class Train
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public string Destination { get; set; }
+        public string Destination { get; }
 
-        public string StartingPoint { get; set; }
+        public string StartingPoint { get; }
 
-        public List<Compartment> Compartments { get; set; }
+        public List<Compartment> Compartments { get; }
 
         public Train(int id, string startingPoint, string destination)
         {

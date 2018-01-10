@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using TrainEmulator.Models;
+using TrainAPI.Models;
 
-namespace TrainEmulator.Controllers
+namespace TrainAPI.Controllers
 {
     [Route("/")]
     public class TrainController : Controller
     {
-        public List<Train> Trains { get; set; }
+        public List<Train> Trains { get; }
 
-        private Random Random { get; set; }
+        private Random Random { get; }
 
         public TrainController()
         {
@@ -20,7 +20,7 @@ namespace TrainEmulator.Controllers
             for (int i = 0; i < this.Random.Next(4, 7); i++)
             {
                 this.Trains.Add(this.CreateRandomTrain());
-            };
+            }
         }
 
         // GET /

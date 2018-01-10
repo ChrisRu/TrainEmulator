@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrainEmulator.Models
+namespace TrainAPI.Models
 {
     public static class Data
     {
@@ -26,7 +26,7 @@ namespace TrainEmulator.Models
             "Amsterdam Zuid"
         };
 
-        private static Random Random = new Random();
+        private static readonly Random Random = new Random();
 
         /// <summary>
         /// Get a random station name from the Stations array
