@@ -87,7 +87,11 @@ namespace TrainAPI
         {
             int id = Trains.Count + 1;
             string startingPoint = await GetRandomStation();
-            string destination = await GetRandomStation();
+            string destination = "";
+            while (destination == "" || destination == startingPoint)
+            {
+                destination = await GetRandomStation();
+            }
 
             Train train = new Train(id, startingPoint, destination);
             for (int i = 0; i < Random.Next(4, 8); i++)
