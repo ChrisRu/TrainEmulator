@@ -4,7 +4,7 @@
     {
         public int Id { get; }
 
-        public int PeopleCount { get; }
+        public int PeopleCount { get; set; }
 
         public Compartment(int id, int peopleCount)
         {

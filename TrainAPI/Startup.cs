@@ -10,6 +10,7 @@ namespace TrainAPI
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
+            new TrainManager();
         }
 
         public IConfiguration Configuration { get; }
