@@ -6,9 +6,9 @@ namespace TrainAPI.Models
     {
         public int Id { get; }
 
-        public string Destination { get; }
+        public string Destination { get; set; }
 
-        public string StartingPoint { get; }
+        public string StartingPoint { get; set; }
 
         public List<Compartment> Compartments { get; }
 

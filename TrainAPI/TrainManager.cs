@@ -12,6 +12,8 @@ namespace TrainAPI
     {
         public static List<Train> Trains { get; set; }
 
+        public static bool RandomInterval { get; set; }
+
         private static List<string> Stations { get; set; }
 
         private static Random Random { get; set; }
@@ -20,6 +22,7 @@ namespace TrainAPI
 
         public TrainManager()
         {
+            RandomInterval = true;
             Trains = new List<Train>();
             Random = new Random();
             Stations = JsonConvert.DeserializeObject<List<string>>(Resources.Stations.ToString());
@@ -29,9 +32,7 @@ namespace TrainAPI
         private async void CreateTrains()
         {
             for (int i = 0; i < Random.Next(4, 7); i++)
-            {
                 Trains.Add(await CreateRandomTrain());
-            }
 
             this.ModifyTrain(null, EventArgs.Empty);
         }
@@ -43,13 +44,9 @@ namespace TrainAPI
         /// <param name="args"></param>
         private void ModifyTrain(object source, EventArgs args)
         {
-            if (Trains.Count > 0)
-            {
+            if (RandomInterval && Trains.Count > 0)
                 foreach (Compartment compartment in Trains[Random.Next(Trains.Count - 1)].Compartments)
-                {
                     compartment.PeopleCount = Random.Next(20);
-                }
-            }
 
             if (this.Timer != null)
             {
@@ -71,9 +68,7 @@ namespace TrainAPI
         public async static Task<string> GetRandomStation()
         {
             if (Stations.Count > 0)
-            {
                 return Stations[Random.Next(Stations.Count - 1)];
-            }
 
             await Task.Delay(10);
             return await GetRandomStation();
@@ -89,15 +84,11 @@ namespace TrainAPI
             string startingPoint = await GetRandomStation();
             string destination = "";
             while (destination == "" || destination == startingPoint)
-            {
                 destination = await GetRandomStation();
-            }
 
             Train train = new Train(id, startingPoint, destination);
             for (int i = 0; i < Random.Next(4, 8); i++)
-            {
                 train.SetCompartment(i, Random.Next(0, 14));
-            }
 
             return train;
         }
