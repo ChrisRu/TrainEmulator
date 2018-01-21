@@ -19,6 +19,10 @@ namespace TrainAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,6 +33,7 @@ namespace TrainAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }

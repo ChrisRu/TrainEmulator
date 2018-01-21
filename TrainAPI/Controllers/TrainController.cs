@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using TrainAPI.Models;
@@ -12,6 +13,7 @@ namespace TrainAPI.Controllers
 
         // GET /
         // Returns all trains
+        [EnableCors("MyPolicy")]
         [HttpGet]
         public List<Train> Get()
         {
@@ -20,6 +22,7 @@ namespace TrainAPI.Controllers
 
         // GET /{id}
         // Returns train matching ID
+        [EnableCors("MyPolicy")]
         [HttpGet("{id}")]
         public Train Get(int id)
         {
