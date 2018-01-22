@@ -1,0 +1,9 @@
+{
+  "name": "Step In",
+  "short_name": "TCV",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#222",
+  "theme_color": "#3535ff"
+}

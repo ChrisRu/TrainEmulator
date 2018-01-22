@@ -6,7 +6,7 @@ using TrainAPI.Models;
 
 namespace TrainAPI.Controllers
 {
-    [Route("/")]
+    [Route("/api")]
     public class TrainController : Controller
     {
         private Random Random { get; }
@@ -23,6 +23,13 @@ namespace TrainAPI.Controllers
         public Train GetTrain(int id)
         {
             return TrainManager.Trains.Find(train => train.Id == id);
+        }
+
+        [EnableCors("MyPolicy")]
+        [HttpGet("/random")]
+        public bool GetRandom()
+        {
+            return TrainManager.RandomInterval;
         }
 
         [EnableCors("MyPolicy")]
@@ -67,7 +74,7 @@ namespace TrainAPI.Controllers
         }
 
         [EnableCors("MyPolicy")]
-        [HttpPost("{id}/{compartment}/edit")]
+        [HttpPost("{id}/{compartmentId}/edit")]
         public ActionResult EditCompartment(int id, int compartmentId)
         {
             var train = this.GetTrain(id);

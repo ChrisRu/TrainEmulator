@@ -35,6 +35,7 @@ namespace TrainAPI
 
             app.UseCors("MyPolicy");
             app.UseMvc();
+            app.UseFileServer();
         }
     }
 }
