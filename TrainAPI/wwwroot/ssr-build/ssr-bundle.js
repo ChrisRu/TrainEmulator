@@ -7424,6 +7424,8 @@ var Chart_Chart = function (_Component) {
 }(Component$1);
 
 /* harmony default export */ var components_Chart = (Chart_Chart);
+// CONCATENATED MODULE: ./config.js
+var URI = 'http://trainemulator.azurewebsites.net/api';
 // CONCATENATED MODULE: ./components/Train/index.jsx
 
 
@@ -7432,6 +7434,7 @@ function Train__classCallCheck(instance, Constructor) { if (!(instance instanceo
 function Train__possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function Train__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -7485,12 +7488,10 @@ var Train_Train = function (_Component) {
 
       var id = _this.props.train.id;
 
-      fetch('http://trainemulator.azurewebsites.net/api/' + id + '/' + compartment + '/edit', {
+      fetch(URI + '/' + id + '/' + compartment + '/edit', {
         method: 'POST',
         body: data
-      }).then(_this.props.refetch).then(function () {
-        _this.props.toggleRefetch(true);
-      });
+      }).then(_this.props.refetch);
     }, _this.scroll = function (event) {
       _this.train.scrollLeft += event.deltaY * 10;
     }, _temp), Train__possibleConstructorReturn(_this, _ret);
@@ -7514,19 +7515,41 @@ var Train_Train = function (_Component) {
       Object(preact_min["h"])(
         'h2',
         { 'class': 'train--title' },
-        Object(preact_min["h"])(
+        edit ? Object(preact_min["h"])('input', {
+          'class': 'train-input',
+          value: train.startingPoint,
+          onChange: function onChange(event) {
+            var data = new FormData();
+            data.append('startingPoint', event.target.value);
+            fetch(URI + '/' + train.id + '/edit', {
+              method: 'POST',
+              body: data
+            });
+          }
+        }) : Object(preact_min["h"])(
           'b',
           null,
           train.startingPoint
         ),
         Train__ref2,
-        Object(preact_min["h"])(
+        edit ? Object(preact_min["h"])('input', {
+          'class': 'train-input',
+          value: train.destination,
+          onChange: function onChange(event) {
+            var data = new FormData();
+            data.append('destination', event.target.value);
+            fetch(URI + '/' + train.id + '/edit', {
+              method: 'POST',
+              body: data
+            });
+          }
+        }) : Object(preact_min["h"])(
           'b',
           null,
           train.destination
         )
       ),
-      Object(preact_min["h"])(
+      window.location.hash.includes('/admin') && Object(preact_min["h"])(
         'button',
         {
           'class': 'edit-button',
@@ -7536,7 +7559,8 @@ var Train_Train = function (_Component) {
                 edit: !prevState.edit
               };
             });
-            toggleRefetch(false);
+
+            toggleRefetch(!_this2.state.edit);
           } },
         Train__ref3,
         'Edit'
@@ -7632,6 +7656,62 @@ var List_List = function List(_ref) {
 };
 
 /* harmony default export */ var components_List = (List_List);
+// CONCATENATED MODULE: ./components/Footer.jsx
+
+
+
+var Footer__ref = Object(preact_min["h"])(
+  "div",
+  { "class": "footer" },
+  Object(preact_min["h"])(
+    "a",
+    { href: "/", native: true },
+    Object(preact_min["h"])(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "512",
+        height: "512",
+        viewBox: "0 0 512 512",
+        "class": "facebook" },
+      Object(preact_min["h"])("path", {
+        fill: "#fff",
+        d: "M256 0C114.609 0 0 114.609 0 256c0 141.391 114.609 256 256 256 141.391 0 256-114.609 256-256C512 114.609 397.391 0 256 0zm0 472c-119.297 0-216-96.703-216-216S136.703 40 256 40s216 96.703 216 216-96.703 216-216 216z"
+      }),
+      Object(preact_min["h"])("path", {
+        fill: "#fff",
+        d: "M316.75 216.812h-44.531v-32.5c0-9.969 10.312-12.281 15.125-12.281h28.767v-43.859l-32.97-.172c-44.983 0-55.25 32.703-55.25 53.672v35.141H195.25V262h32.641v122h44.328V262h37.656l6.875-45.188z"
+      })
+    )
+  ),
+  Object(preact_min["h"])(
+    "a",
+    { href: "/", native: true },
+    Object(preact_min["h"])(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "169.063",
+        height: "169.063",
+        viewBox: "0 0 169.063 169.063",
+        "class": "instagram" },
+      Object(preact_min["h"])("path", {
+        fill: "#fff",
+        d: "M122.406 0H46.654C20.929 0 0 20.93 0 46.655v75.752c0 25.726 20.929 46.655 46.654 46.655h75.752c25.727 0 46.656-20.93 46.656-46.655V46.655C169.063 20.93 148.133 0 122.406 0zm31.657 122.407c0 17.455-14.201 31.655-31.656 31.655H46.654C29.2 154.063 15 139.862 15 122.407V46.655C15 29.201 29.2 15 46.654 15h75.752c17.455 0 31.656 14.201 31.656 31.655v75.752z"
+      }),
+      Object(preact_min["h"])("path", {
+        fill: "#fff",
+        d: "M84.531 40.97c-24.021 0-43.563 19.542-43.563 43.563 0 24.02 19.542 43.561 43.563 43.561s43.563-19.541 43.563-43.561c0-24.021-19.542-43.563-43.563-43.563zm0 72.123c-15.749 0-28.563-12.812-28.563-28.561 0-15.75 12.813-28.563 28.563-28.563s28.563 12.813 28.563 28.563c0 15.749-12.814 28.561-28.563 28.561zM129.921 28.251c-2.89 0-5.729 1.17-7.77 3.22a11.053 11.053 0 0 0-3.23 7.78c0 2.891 1.18 5.73 3.23 7.78 2.04 2.04 4.88 3.22 7.77 3.22 2.9 0 5.73-1.18 7.78-3.22 2.05-2.05 3.22-4.89 3.22-7.78 0-2.9-1.17-5.74-3.22-7.78-2.04-2.05-4.88-3.22-7.78-3.22z"
+      })
+    )
+  )
+);
+
+var Footer = function Footer() {
+  return Footer__ref;
+};
+
+/* harmony default export */ var components_Footer = (Footer);
 // CONCATENATED MODULE: ./components/app.jsx
 
 
@@ -7640,6 +7720,8 @@ function app__classCallCheck(instance, Constructor) { if (!(instance instanceof 
 function app__possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function app__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -7669,6 +7751,8 @@ var app__ref = Object(preact_min["h"])(
   )
 );
 
+var app__ref3 = Object(preact_min["h"])(components_Footer, null);
+
 var app_App = function (_Component) {
   app__inherits(App, _Component);
 
@@ -7684,12 +7768,11 @@ var app_App = function (_Component) {
     return _ret = (_temp = (_this = app__possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
       trains: [],
       fetching: true,
-      refetch: true,
-      random: false
+      refetch: true
     }, _this.toggleRandom = function (bool) {
       var data = new FormData();
       data.append('enabled', String(bool));
-      fetch('http://trainemulator.azurewebsites.net/api/random', {
+      fetch(URI + '/random', {
         method: 'POST',
         body: data
       });
@@ -7730,24 +7813,6 @@ var app_App = function (_Component) {
     return Object(preact_min["h"])(
       'div',
       null,
-      Object(preact_min["h"])(
-        'div',
-        { 'class': 'random' },
-        Object(preact_min["h"])('input', {
-          type: 'checkbox',
-          onInput: function onInput(event) {
-            _this3.setState({ random: event.target.value });
-          }
-        }),
-        Object(preact_min["h"])(
-          'button',
-          {
-            onClick: function onClick() {
-              _this3.toggleRandom(_this3.state.random);
-            } },
-          'Set Random'
-        )
-      ),
       Object(preact_min["h"])(components_Title, {
         value: 'Step In',
         onClick: function onClick() {
@@ -7771,7 +7836,7 @@ var app_App = function (_Component) {
         }),
         Object(preact_min["h"])(
           match_default.a,
-          { path: '/:id' },
+          { path: '/:id/:test?' },
           function (_ref2) {
             var path = _ref2.path;
 
@@ -7792,7 +7857,8 @@ var app_App = function (_Component) {
             }
           }
         )
-      )
+      ),
+      app__ref3
     );
   };
 
